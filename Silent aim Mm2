@@ -1,0 +1,14 @@
+Target = "USERNAME"
+getgenv().SheriffAim = false;
+getgenv().GunAccuracy = 75;
+
+local Players = game:GetService("Players")
+local GunHook
+GunHook = hookmetamethod(game, "__namecall", function(self, ...)
+	local method = getnamecallmethod()
+	local args = { ... }
+	if not checkcaller() then
+		if typeof(self) == "Instance" then
+			if self.Name == "ShootGun" and method == "InvokeServer" then
+				if getgenv().SheriffAim and getgenv().GunAccuracy then
+					if Murderer then
